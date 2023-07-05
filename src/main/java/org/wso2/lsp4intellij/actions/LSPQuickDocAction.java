@@ -15,7 +15,6 @@
  */
 package org.wso2.lsp4intellij.actions;
 
-import com.intellij.codeInsight.documentation.actions.ShowQuickDocInfoAction;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageDocumentation;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -34,25 +33,25 @@ import org.wso2.lsp4intellij.editor.EditorEventManagerBase;
 /**
  * Action overriding QuickDoc (CTRL+Q)
  */
-class LSPQuickDocAction extends ShowQuickDocInfoAction implements DumbAware {
-    private Logger LOG = Logger.getInstance(LSPQuickDocAction.class);
-
-    @Override
-    public void actionPerformed(AnActionEvent e) {
-        Editor editor = e.getData(CommonDataKeys.EDITOR);
-        VirtualFile file = FileDocumentManager.getInstance().getFile(editor.getDocument());
-        Language language = PsiManager.getInstance(editor.getProject()).findFile(file).getLanguage();
-        //Hack for IntelliJ 2018 TODO proper way
-        if (LanguageDocumentation.INSTANCE.allForLanguage(language).isEmpty()
-                || (Integer.parseInt(ApplicationInfo.getInstance().getMajorVersion()) > 2017)
-                && language == PlainTextLanguage.INSTANCE) {
-            EditorEventManager manager = EditorEventManagerBase.forEditor(editor);
-            if (manager != null) {
-                manager.quickDoc(editor);
-            } else {
-                super.actionPerformed(e);
-            }
-        } else
-            super.actionPerformed(e);
-    }
-}
+//class LSPQuickDocAction extends ShowQuickDocInfoAction implements DumbAware {
+//    private Logger LOG = Logger.getInstance(LSPQuickDocAction.class);
+//
+//    @Override
+//    public void actionPerformed(AnActionEvent e) {
+//        Editor editor = e.getData(CommonDataKeys.EDITOR);
+//        VirtualFile file = FileDocumentManager.getInstance().getFile(editor.getDocument());
+//        Language language = PsiManager.getInstance(editor.getProject()).findFile(file).getLanguage();
+//        //Hack for IntelliJ 2018 TODO proper way
+//        if (LanguageDocumentation.INSTANCE.allForLanguage(language).isEmpty()
+//                || (Integer.parseInt(ApplicationInfo.getInstance().getMajorVersion()) > 2017)
+//                && language == PlainTextLanguage.INSTANCE) {
+//            EditorEventManager manager = EditorEventManagerBase.forEditor(editor);
+//            if (manager != null) {
+//                manager.quickDoc(editor);
+//            } else {
+//                super.actionPerformed(e);
+//            }
+//        } else
+//            super.actionPerformed(e);
+//    }
+//}

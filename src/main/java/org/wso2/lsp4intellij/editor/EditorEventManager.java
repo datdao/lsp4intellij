@@ -1222,9 +1222,10 @@ public class EditorEventManager {
             if (isOpen) {
                 LOG.warn("Editor " + editor + " was already open");
             } else {
-                final String extension = FileDocumentManager.getInstance().getFile(editor.getDocument()).getExtension();
+                String fileName = FileDocumentManager.getInstance().getFile(
+                        editor.getDocument()).getFileType().getName().toLowerCase().replace(" ", "-");
                 requestManager.didOpen(new DidOpenTextDocumentParams(new TextDocumentItem(identifier.getUri(),
-                        wrapper.serverDefinition.languageIdFor(extension),
+                        fileName,
                         version++,
                         editor.getDocument().getText())));
                 isOpen = true;
